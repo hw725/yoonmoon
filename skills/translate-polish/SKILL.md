@@ -1,6 +1,12 @@
 ---
-name: translate-polish
-description: 번역된 한국어 글(번역서·자막·논문·문서, 그리고 구글번역·DeepL·파파고 등 기계번역/MTPE 결과)의 어색한 번역투를 자연스러운 한국어로 다듬는다. 무생물 주어, 직역 대명사(그것·그들), 이중 피동, 무생물 복수 '-들', '~에 대해/~을 통해' 조사 남용, 명시화 과잉, 명사화·경동사 등 영한·일한 번역 간섭과 번역 보편소를 탐지해 내용은 보존하고 번역체만 교정한다(재번역 아님). 다음과 같을 때 사용 — 번역투·번역체·직역체를 고쳐 달라, 기계번역 결과를 다듬어 달라, 번역한 글이 어색하다는 호소, "포스트에디팅/MTPE"·"번역 윤문" 지칭. 원문(원천 텍스트)을 같이 주면 명시화·간섭을 대조해 본다. 'AI가 쓴 글'을 다듬는 게 목적이면 humanize, AI 작성 판별은 detect, 맞춤법·문법 교정은 proofread, 문체·격식 변환은 restyle 스킬을 쓴다. 다른 언어로 새로 옮기는 번역 작업은 제외한다.
+name: korean-translate-polish
+license: MIT
+metadata:
+  author: amondnet
+  version: "1.0.0-local.4"
+  category: korean-writing
+  upstream: https://github.com/amondnet/yoonmoon
+description: 번역된 한국어 글(번역서·자막·논문·문서, 그리고 구글번역·DeepL·파파고 등 기계번역/MTPE 결과)의 어색한 번역투를 자연스러운 한국어로 다듬는다. 무생물 주어, 직역 대명사(그것·그들), 이중 피동, 무생물 복수 '-들', '~에 대해/~을 통해' 조사 남용, 명시화 과잉, 명사화·경동사 등 영한·일한 번역 간섭과 번역 보편소를 탐지해 내용은 보존하고 번역체만 교정한다(재번역 아님). 다음과 같을 때 사용 — "번역투 없애줘", "번역체 자연스럽게", "기계번역 다듬어줘", "직역체 고쳐줘", "번역한 글 어색해", "포스트에디팅/MTPE", "번역 윤문". 원문(원천 텍스트)을 같이 주면 명시화·간섭을 대조해 본다. 'AI가 쓴 글'을 다듬는 게 목적이면 humanize-korean, 맞춤법·문법 교정은 korean-grammar-checker를 쓴다(원 제품군의 detect·restyle은 이 저장소에 없다). 다른 언어로 새로 옮기는 번역 작업은 제외한다.
 ---
 
 # 번역 윤문(translate-polish) — 번역투 교정
@@ -10,7 +16,7 @@ description: 번역된 한국어 글(번역서·자막·논문·문서, 그리�
 담은 **정보는 한 글자도 바꾸지 않고**(재번역 아님) 번역투 구조·표현만 surgical하게 교정한다.
 탐지 → 교정 → 자체검증을 **이 컨텍스트 안에서 한 흐름으로** 처리한다(별도 서브에이전트를 띄우지 않는다).
 
-humanize가 *AI가 쓴 글*의 AI 티를 지운다면, 이 스킬은 *번역된 글*의 번역투를 지운다. 둘은 패턴이
+humanize-korean이 *AI가 쓴 글*의 AI 티를 지운다면, 이 스킬은 *번역된 글*의 번역투를 지운다. 둘은 패턴이
 겹치지만 입력원과 관점(원천 언어 간섭·번역 보편소)이 다르다.
 </role>
 
@@ -20,7 +26,7 @@ humanize가 *AI가 쓴 글*의 AI 티를 지운다면, 이 스킬은 *번역된 
 - `references/translationese-taxonomy.md` — 번역투 8대 유형 분류(정의·예시·심각도·보존, 원천 언어 게이트). **Phase 1**에서 읽는다.
 - `references/polish-guide.md` — 교정 원칙·순서·자체검증 6항·강도·원문 활용. **Phase 2~3**에서 읽는다.
 - `references/translationese-research.md` — 번역투·번역 보편소·post-editese의 학술 근거(한국 번역학·국어학, Baker·Toury·Toral 2019 등). 배경 근거가 필요할 때만.
-- `../humanize/references/ai-tell-taxonomy.md` — AI 티 분류(겹치는 패턴 참고). 번역문이 동시에 AI 글로 의심되면 참고.
+- `../humanize-korean/references/ai-tell-taxonomy.md` — AI 티 분류(겹치는 패턴 참고). 번역문이 동시에 AI 글로 의심되면 참고.
   </resources>
 
 <workflow>
@@ -96,9 +102,9 @@ humanize가 *AI가 쓴 글*의 AI 티를 지운다면, 이 스킬은 *번역된 
 </followupCommands>
 
 <outOfScope>
-- AI가 쓴 글의 AI 티 제거 → **humanize** 스킬
-- AI 작성 여부 판별 → **detect** 스킬
-- 맞춤법·띄어쓰기·문법·비문 교정 → **proofread** 스킬
-- 문체·격식·톤 의도적 변환 → **restyle** 스킬
+- AI가 쓴 글의 AI 티 제거 → **humanize-korean** 스킬
+- AI 작성 여부 판별 → 이 저장소에 전용 스킬 없음(원 제품군 `detect` 미채택). AI 티 패턴 진단이 목적이면 **humanize-korean** 스킬
+- 맞춤법·띄어쓰기·문법·비문 교정 → **korean-grammar-checker** 스킬
+- 문체·격식·톤 통일(어조·용어·형식 일관성) → **korean-style-guide** 스킬. 문체를 다른 격식으로 의도적으로 바꾸는 전용 스킬은 없다(원 제품군 `restyle` 미채택)
 - 다른 언어 → 한국어로 새로 옮기는 번역, 오역 자체의 재번역 → 번역 작업(별도)
 </outOfScope>
